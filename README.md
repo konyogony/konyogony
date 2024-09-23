@@ -7,7 +7,7 @@
 <p align="center">
 	<a href="https://archlinux.org/"><img src="https://img.shields.io/badge/DISTRO-Arch-74c7ec?style=flat&logo=archlinux&label=Distro" /></a>
 	<a href="https://hyprland.org"><img src="https://img.shields.io/badge/WC-Hyprland-89dceb?style=flat&logo=elixir&label=Tiler" /></a>
-	<a href="https://discord.gg/Am3jFwxe"><img src="https://img.shields.io/discord/831364077875626015?color=74c7ec&label=Discord&logo=discord" /></a>
+	<a href="https://discord.gg/Am3jFwxe"><img src="https://img.shields.io/discord/1278671075017752646?color=74c7ec&label=Discord&logo=discord" /></a>
 	<a href="https://rust-lang.org"><img src="https://img.shields.io/badge/LANG-Rust-f2cdcd?style=flat&logo=rust&label=Learning" /></a>
 	<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/LANG-TypeScript-007acc?style=flat&logo=typescript&label=Know" /></a>
 </p>
