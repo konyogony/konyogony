@@ -10,7 +10,7 @@
 	<a href="https://discord.gg/BrXAHknFE6"><img src="https://img.shields.io/discord/1278671075017752646?color=74c7ec&label=Discord&logo=discord" /></a>
 	<a href="https://rust-lang.org"><img src="https://img.shields.io/badge/LANG-Rust-f2cdcd?style=flat&logo=rust&label=Learning" /></a>
 	<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/LANG-TypeScript-007acc?style=flat&logo=typescript&label=Know" /></a>
-	<a href="https://wakatime.com/@a25f75d3-1b5e-4ced-be1c-94e632613a86"><img src="https://wakatime.com/badge/user/a25f75d3-1b5e-4ced-be1c-94e632613a86.svg" /></a>
+	<a href="https://wakatime.com/@konyogony"><img src="https://img.shields.io/endpoint?url=https://wakapi.dev/api/compat/shields/v1/konyogony/interval:all_time&label=All%20time&color=blue" /></a>
 </p>
 <p align='center'>
 	<img src="https://github-readme-stats.vercel.app/api?username=konyogony&hide_title=true&hide_rank=true&show_icons=true&include_all_commits=true&line_height=24&hide_border=true&number_format=long&bg_color=1e1e2e&text_color=cdd6f4&icon_color=cba6f7&title_color=94e2d5" />
