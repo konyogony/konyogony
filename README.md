@@ -1,5 +1,5 @@
 <h1 align="center">
-	Meet kony_ogony, an intermediate fullstack dev that does cool stuff!
+	Meet kony_ogony, an intermediate fullstack dev with cool stuff!
 </h1>
 <p align="center">
 	<a href="https://archlinux.org/"><img src="https://img.shields.io/badge/DISTRO-Arch-74c7ec?style=for-the-badge&logo=archlinux&label=Distro" /></a>
@@ -19,5 +19,5 @@
 </p>
 <p align='center'>
 	<img src="https://github-readme-stats.vercel.app/api/wakatime?username=konyogony&api_domain=wakapi.dev&theme=radical&custom_title=Wakapi.dev+Stats+%28Since+Sunday,+26+Jan%29&layout=compact&hide_border=true" />
-	<img src="https://streak-stats.demolab.com?user=konyogony&theme=radical&hide_border=true&short_numbers=true&card_width=400&card_height=300"/>
+	<img src="https://streak-stats.demolab.com?user=konyogony&theme=radical&hide_border=true&short_numbers=true&card_width=400&card_height=400"/>
 </p>
