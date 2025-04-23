@@ -20,6 +20,3 @@
 <p align='center'>
 	<img src="https://github-readme-stats.vercel.app/api/wakatime?username=konyogony&api_domain=wakapi.dev&theme=radical&custom_title=Wakapi.dev+Stats+%28Since+Sunday,+26+Jan%29&layout=compact&hide_border=true" />
 </p>
-<p align='center'>
-	<img src="https://streak-stats.demolab.com?user=konyogony&theme=radical&hide_border=true&short_numbers=true&card_width=400&card_height=400"/>
-</p>
