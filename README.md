@@ -1,5 +1,5 @@
 <h1 align="center">
-	Meet kony_ogony, an intermediate fullstack dev with cool stuff!
+	Meet kony_ogony, an junior fullstack dev with cool stuff!
 </h1>
 <p align="center">
 	<a href="https://archlinux.org/"><img src="https://img.shields.io/badge/DISTRO-Arch-74c7ec?style=for-the-badge&logo=archlinux&label=Distro" /></a>
