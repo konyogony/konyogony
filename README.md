@@ -43,6 +43,11 @@
 	<b><a href="https://ocean.konyogony.dev">ocean.konyogony.dev</a></b><br/>
 	Real-time ocean simulation in Rust 🌊
 </p>
+
+<p align="center">
+	<b><a href="https://physics.konyogony.dev">physics.konyogony.dev</a></b><br/>
+	My journey in advanced physics lectures 🧲
+</p>
 <!--
 <p align='center'>
 	<img src="https://github-readme-stats.vercel.app/api?username=konyogony&hide_title=false&hide_rank=true&show_icons=true&include_all_commits=true&line_height=26&theme=radical&hide_border=true&border_radius=10" />
