@@ -30,6 +30,11 @@
 <h2 align="center">Projects</h2>
 
 <p align="center">
+	<b><a href="https://konyogony.dev">Portfolio</a></b><br/>
+	Small personal portfolio
+</p>
+
+<p align="center">
 	<b><a href="https://wayclip.com">wayclip.com</a></b><br/>
 	A Wayland clipping tool (🚧currently under maintenance🚧)
 </p>
