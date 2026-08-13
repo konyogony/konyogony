@@ -143,18 +143,57 @@
           <div>
             <a
               href="https://headstartphuket.com/"
+              target="_blank"
               class="school-link text-stone-500 text-xs font-medium hover:text-stone-400"
             >
               HeadStart International School
             </a>
-            <div class="mt-2 space-y-1">
-              <div class="flex justify-between items-center text-xs">
-                <span class="text-stone-500">Cambridge AS-Level</span>
-                <span class="mono text-orange-400">4A</span>
+            <div class="mt-2.5 space-y-1">
+              <div
+                class="group relative flex justify-between items-center text-xs cursor-help"
+              >
+                <span
+                  class="text-stone-500 group-hover:text-stone-300 transition-colors"
+                  >Edexcel Extended Project</span
+                >
+                <span class="mono text-orange-400">A*</span>
+                <div
+                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-stone-900 border border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-300 shadow-xl leading-relaxed"
+                >
+                  May/June 2026 ZPJ30 EPQ: 26/28 A*
+                </div>
               </div>
-              <div class="flex justify-between items-center text-xs">
-                <span class="text-stone-500">Cambridge IGCSE</span>
+
+              <div
+                class="group relative flex justify-between items-center text-xs cursor-help"
+              >
+                <span
+                  class="text-stone-500 group-hover:text-stone-300 transition-colors"
+                  >Cambridge AS-Level</span
+                >
+                <span class="mono text-orange-400">4A</span>
+                <div
+                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-stone-900 border border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-300 shadow-xl leading-relaxed"
+                >
+                  May/June 2026 CIE AS-Levels: Chemistry A, Physics A, Comp.
+                  Sci. A, Mathematics A
+                </div>
+              </div>
+
+              <div
+                class="group relative flex justify-between items-center text-xs cursor-help"
+              >
+                <span
+                  class="text-stone-500 group-hover:text-stone-300 transition-colors"
+                  >Cambridge IGCSE</span
+                >
                 <span class="mono text-orange-400">8A*/A</span>
+                <div
+                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-stone-900 border border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-300 shadow-xl leading-relaxed"
+                >
+                  May/June 2025 CIE IGCSE: Mathematics A*, Coord. Sci. A*A*,
+                  Comp. Sci. A*, Business A*, ICT A*, FLE A, Economics A
+                </div>
               </div>
             </div>
           </div>
@@ -264,20 +303,21 @@
         try {
           const response = await fetch("https://api.konyogony.dev/get-stats");
           if (!response.ok) throw new Error("Offline");
-      
+
           const data = await response.json();
-          
+
           const THIRTY_MINUTES = 30 * 60 * 1000;
           const now = Date.now();
-          
-          const isRecent = data.timestamp_ms && (now - data.timestamp_ms) < THIRTY_MINUTES;
-      
-          const hasSong = 
+
+          const isRecent =
+            data.timestamp_ms && now - data.timestamp_ms < THIRTY_MINUTES;
+
+          const hasSong =
             data.spotify &&
             data.spotify.title &&
             data.spotify.title !== "None" &&
             data.spotify.title !== "";
-      
+
           if (hasSong && isRecent) {
             songEl.textContent = data.spotify.title;
             artistEl.textContent = data.spotify.artist;
