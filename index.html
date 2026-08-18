@@ -19,6 +19,20 @@
         font-family: "Inter", sans-serif;
         background: #121212;
       }
+      .bg-drawing {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-image: url("math.svg");
+        background-size: 2300px;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0.15;
+        pointer-events: none;
+      }
       .mono {
         font-family: "JetBrains Mono", monospace;
       }
@@ -49,6 +63,7 @@
     </style>
   </head>
   <body class="text-stone-400 min-h-screen p-6 md:p-16">
+    <div class="bg-drawing"></div>
     <div class="max-w-md mx-auto">
       <header class="mb-10">
         <img
