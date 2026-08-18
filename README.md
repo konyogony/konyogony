@@ -12,10 +12,10 @@
 		<img src="https://img.shields.io/badge/EDITOR-Neovim-57A143?logo=neovim&logoColor=white&style=for-the-badge" />
 	</a>
 	<a href="https://rust-lang.org">
-		<img src="https://img.shields.io/badge/LANG-Rust-f2cdcd?style=for-the-badge&logo=rust&label=Learning" />
+		<img src="https://img.shields.io/badge/LANG-Rust-f2cdcd?style=for-the-badge&logo=rust&label=Love" />
 	</a>
 	<a href="https://www.typescriptlang.org/">
-		<img src="https://img.shields.io/badge/LANG-TypeScript-007acc?style=for-the-badge&logo=typescript&label=Main" />
+		<img src="https://img.shields.io/badge/LANG-TypeScript-007acc?style=for-the-badge&logo=typescript&label=Know" />
 	</a>
 </p>
 
