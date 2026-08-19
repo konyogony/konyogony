@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>konyogony</title>
+
+    <script
+      data-goatcounter="https://konyogony.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"
+    ></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="icon"
@@ -31,9 +38,13 @@
         background-size: 2500px;
         background-position: center;
         background-repeat: no-repeat;
-        opacity: 0.15;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
         pointer-events: none;
-        will-change: transform;
+        will-change: transform, opacity;
+      }
+      .bg-drawing.loaded {
+        opacity: 0.15;
       }
       .mono {
         font-family: "JetBrains Mono", monospace;
@@ -86,6 +97,7 @@
           <a
             href="https://www.rust-lang.org/"
             target="_blank"
+            data-goatcounter-click="link-rust"
             class="text-orange-400 hover:underline"
             >Rust</a
           >
@@ -93,6 +105,7 @@
           <a
             href="https://www.typescriptlang.org/"
             target="_blank"
+            data-goatcounter-click="link-typescript"
             class="text-sky-400 hover:underline"
             >TypeScript</a
           >.
@@ -118,6 +131,7 @@
           <a
             href="https://ocean.konyogony.dev/"
             target="_blank"
+            data-goatcounter-click="work-ocean-simulation"
             class="project-item block py-3"
           >
             <span class="text-stone-200 text-sm">🌊 Ocean Simulation</span>
@@ -126,6 +140,7 @@
           <a
             href="https://physics.konyogony.dev/"
             target="_blank"
+            data-goatcounter-click="work-physics-blog"
             class="project-item block py-3"
           >
             <span class="text-stone-200 text-sm">🧲 Physics Blog</span>
@@ -134,6 +149,7 @@
           <a
             href="https://github.com/wayclip"
             target="_blank"
+            data-goatcounter-click="work-wayclip"
             class="project-item block py-3"
           >
             <span class="text-stone-200 text-sm">🚧 Wayclip</span>
@@ -142,6 +158,7 @@
           <a
             href="https://hypr.konyogony.dev/"
             target="_blank"
+            data-goatcounter-click="work-hyprland-recreation"
             class="project-item block py-3"
           >
             <span class="text-stone-200 text-sm">🖥️ Hyprland Recreation</span>
@@ -161,6 +178,7 @@
             <a
               href="https://headstartphuket.com/"
               target="_blank"
+              data-goatcounter-click="edu-headstart"
               class="school-link text-stone-500 text-xs font-medium hover:text-stone-400"
             >
               HeadStart International School
@@ -259,30 +277,35 @@
           <a
             href="https://github.com/konyogony/"
             target="_blank"
+            data-goatcounter-click="social-github"
             class="text-stone-600 hover:text-stone-300 transition-colors"
             >github</a
           >
           <a
             href="https://discord.com/users/564472732071493633"
             target="_blank"
+            data-goatcounter-click="social-discord"
             class="text-stone-600 hover:text-stone-300 transition-colors"
             >discord</a
           >
           <a
             href="https://steamcommunity.com/id/kony_ogony/"
             target="_blank"
+            data-goatcounter-click="social-steam"
             class="text-stone-600 hover:text-stone-300 transition-colors"
             >steam</a
           >
           <a
             href="https://open.spotify.com/user/xeq03n90tcwkg4tegzdxggvzd"
             target="_blank"
+            data-goatcounter-click="social-spotify"
             class="text-stone-600 hover:text-stone-300 transition-colors"
             >spotify</a
           >
           <a
             href="mailto:me@konyogony.dev"
             target="_blank"
+            data-goatcounter-click="contact-mail"
             class="text-stone-600 hover:text-stone-300 transition-colors"
             >mail</a
           >
@@ -304,6 +327,11 @@
 
       const INTENSITY = 10;
       const DAMPING = 0.03;
+
+      const bgImg = new Image();
+      bgImg.src = "math.svg";
+      bgImg.onload = () => bg.classList.add("loaded");
+      if (bgImg.complete) bg.classList.add("loaded");
 
       window.addEventListener("mousemove", (e) => {
         mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
