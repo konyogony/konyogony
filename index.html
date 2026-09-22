@@ -12,6 +12,21 @@
     ></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
+    
+    <script>
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+
     <link
       rel="icon"
       type="image/png"
@@ -24,7 +39,6 @@
     <style>
       body {
         font-family: "Inter", sans-serif;
-        background: #121212;
         overflow-x: hidden;
       }
       .bg-drawing {
@@ -39,23 +53,36 @@
         background-position: center;
         background-repeat: no-repeat;
         opacity: 0;
-        transition: opacity 0.8s ease-in-out;
+        filter: invert(1);
+        transition: opacity 0.8s ease-in-out, filter 0.3s ease;
         pointer-events: none;
         will-change: transform, opacity;
       }
+      html.dark .bg-drawing {
+        filter: invert(0);
+      }
       .bg-drawing.loaded {
+        opacity: 0.05;
+      }
+      html.dark .bg-drawing.loaded {
         opacity: 0.15;
       }
       .mono {
         font-family: "JetBrains Mono", monospace;
       }
       .project-item {
-        border-bottom: 1px solid #1f1f1f;
+        border-bottom: 1px solid #e7e5e4;
         transition: all 0.15s;
+      }
+      html.dark .project-item {
+        border-bottom-color: #1f1f1f;
       }
       @media (hover: hover) {
         .project-item:hover {
           padding-left: 8px;
+          border-bottom-color: #f97316;
+        }
+        html.dark .project-item:hover {
           border-bottom-color: #f97316;
         }
       }
@@ -71,41 +98,54 @@
         animation: spin-slow 3.5s linear infinite;
       }
       .record-ring {
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
+      }
+      html.dark .record-ring {
         box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);
       }
     </style>
   </head>
-  <body class="text-stone-400 min-h-screen p-6 md:p-16">
+  <body class="bg-stone-50 dark:bg-[#121212] text-stone-600 dark:text-stone-400 min-h-screen p-6 md:p-16 transition-colors duration-300">
     <div class="bg-drawing"></div>
     <div class="max-w-md mx-auto relative z-10">
-      <header class="mb-10">
+      <header class="mb-10 relative">
         <img
           src="https://avatars.githubusercontent.com/u/45127834?v=4"
           alt="@konyogony pfp"
           class="w-20 h-20 rounded-full mb-5"
         />
+        
+        <button id="theme-toggle" class="absolute top-0 right-0 p-2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition-colors focus:outline-none" aria-label="Toggle Theme">
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
         <a
           href="https://github.com/konyogony"
           target="_blank"
-          class="mono text-xs text-stone-500 hover:text-orange-400 transition-colors inline-block mb-1"
+          class="mono text-xs text-stone-400 dark:text-stone-500 hover:text-orange-500 dark:hover:text-orange-400 transition-colors inline-block mb-1"
         >
           @konyogony
         </a>
-        <h1 class="text-2xl text-stone-100 font-semibold">Ilya Rasputin</h1>
-        <p class="mono text-xs text-stone-400 mt-1">
+        <h1 class="text-2xl text-stone-900 dark:text-stone-100 font-semibold">Ilya Rasputin</h1>
+        <p class="mono text-xs text-stone-500 dark:text-stone-400 mt-1">
           rust engineer & web developer
         </p>
       </header>
 
       <section class="mb-10">
-        <p class="text-stone-300 leading-relaxed text-sm">
+        <p class="text-stone-700 dark:text-stone-300 leading-relaxed text-sm">
           Love creating amazing interactive projects, including working with
           shaders, cli's and high performance systems. Writing
           <a
             href="https://www.rust-lang.org/"
             target="_blank"
             data-goatcounter-click="link-rust"
-            class="text-orange-400 hover:underline"
+            class="text-orange-500 dark:text-orange-400 hover:underline"
             >Rust</a
           >
           and
@@ -113,24 +153,24 @@
             href="https://www.typescriptlang.org/"
             target="_blank"
             data-goatcounter-click="link-typescript"
-            class="text-sky-400 hover:underline"
+            class="text-sky-500 dark:text-sky-400 hover:underline"
             >TypeScript</a
           >.
         </p>
         <div
-          class="mono text-xs text-stone-600 mt-4 flex flex-wrap gap-2 md:gap-3"
+          class="mono text-xs mt-4 flex flex-wrap gap-2 md:gap-3"
         >
-          <span class="text-stone-500">arch</span>
-          <span class="text-stone-600">/</span>
-          <span class="text-stone-500">neovim</span>
-          <span class="text-stone-600">/</span>
-          <span class="text-stone-500">hyprland</span>
+          <span class="text-stone-600 dark:text-stone-500">arch</span>
+          <span class="text-stone-300 dark:text-stone-600">/</span>
+          <span class="text-stone-600 dark:text-stone-500">neovim</span>
+          <span class="text-stone-300 dark:text-stone-600">/</span>
+          <span class="text-stone-600 dark:text-stone-500">hyprland</span>
         </div>
       </section>
 
       <section class="mb-10">
         <h2
-          class="text-xs text-stone-600 uppercase tracking-widest mb-4 font-medium mono"
+          class="text-xs text-stone-500 dark:text-stone-600 uppercase tracking-widest mb-4 font-medium mono"
         >
           Work
         </h2>
@@ -141,8 +181,8 @@
             data-goatcounter-click="work-ocean-simulation"
             class="project-item block py-3"
           >
-            <span class="text-stone-200 text-sm">🌊 Ocean Simulation</span>
-            <span class="mono text-xs text-stone-600 ml-2">wgpu</span>
+            <span class="text-stone-800 dark:text-stone-200 text-sm">🌊 Ocean Simulation</span>
+            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2">wgpu</span>
           </a>
           <a
             href="https://physics.konyogony.dev/"
@@ -150,8 +190,8 @@
             data-goatcounter-click="work-physics-blog"
             class="project-item block py-3"
           >
-            <span class="text-stone-200 text-sm">🧲 Physics Blog</span>
-            <span class="mono text-xs text-stone-600 ml-2">rust-gpu</span>
+            <span class="text-stone-800 dark:text-stone-200 text-sm">🧲 Physics Blog</span>
+            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2">rust-gpu</span>
           </a>
           <a
             href="https://github.com/wayclip"
@@ -159,8 +199,8 @@
             data-goatcounter-click="work-wayclip"
             class="project-item block py-3"
           >
-            <span class="text-stone-200 text-sm">🚧 Wayclip</span>
-            <span class="mono text-xs text-stone-600 ml-2">gstreamer</span>
+            <span class="text-stone-800 dark:text-stone-200 text-sm">🚧 Wayclip</span>
+            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2">gstreamer</span>
           </a>
           <a
             href="https://hypr.konyogony.dev/"
@@ -168,15 +208,15 @@
             data-goatcounter-click="work-hyprland-recreation"
             class="project-item block py-3"
           >
-            <span class="text-stone-200 text-sm">🖥️ Hyprland Recreation</span>
-            <span class="mono text-xs text-stone-600 ml-2">nextjs</span>
+            <span class="text-stone-800 dark:text-stone-200 text-sm">🖥️ Hyprland Recreation</span>
+            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2">nextjs</span>
           </a>
         </div>
       </section>
 
       <section class="mb-12">
         <h2
-          class="text-xs text-stone-600 uppercase tracking-widest mb-4 font-medium mono"
+          class="text-xs text-stone-500 dark:text-stone-600 uppercase tracking-widest mb-4 font-medium mono"
         >
           Education
         </h2>
@@ -186,7 +226,7 @@
               href="https://headstartphuket.com/"
               target="_blank"
               data-goatcounter-click="edu-headstart"
-              class="school-link text-stone-500 text-xs font-medium hover:text-stone-400"
+              class="school-link text-stone-600 dark:text-stone-500 text-xs font-medium hover:text-stone-800 dark:hover:text-stone-400"
             >
               HeadStart International School
             </a>
@@ -195,12 +235,12 @@
                 class="group relative flex justify-between items-center text-xs cursor-help"
               >
                 <span
-                  class="text-stone-500 group-hover:text-stone-300 transition-colors"
+                  class="text-stone-600 dark:text-stone-500 group-hover:text-stone-900 dark:group-hover:text-stone-300 transition-colors"
                   >August SAT</span
                 >
-                <span class="mono text-orange-400">1450</span>
+                <span class="mono text-orange-500 dark:text-orange-400">1450</span>
                 <div
-                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-stone-900 border border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-300 shadow-xl leading-relaxed"
+                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-600 dark:text-stone-300 shadow-xl leading-relaxed"
                 >
                   August 2026 SAT. Math: 790, RW: 660
                 </div>
@@ -210,12 +250,12 @@
                 class="group relative flex justify-between items-center text-xs cursor-help"
               >
                 <span
-                  class="text-stone-500 group-hover:text-stone-300 transition-colors"
+                  class="text-stone-600 dark:text-stone-500 group-hover:text-stone-900 dark:group-hover:text-stone-300 transition-colors"
                   >Edexcel Extended Project</span
                 >
-                <span class="mono text-orange-400">A*</span>
+                <span class="mono text-orange-500 dark:text-orange-400">A*</span>
                 <div
-                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-stone-900 border border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-300 shadow-xl leading-relaxed"
+                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-600 dark:text-stone-300 shadow-xl leading-relaxed"
                 >
                   May/June 2026 ZPJ30 EPQ: 26/28 A*
                 </div>
@@ -225,12 +265,12 @@
                 class="group relative flex justify-between items-center text-xs cursor-help"
               >
                 <span
-                  class="text-stone-500 group-hover:text-stone-300 transition-colors"
+                  class="text-stone-600 dark:text-stone-500 group-hover:text-stone-900 dark:group-hover:text-stone-300 transition-colors"
                   >Cambridge AS-Level</span
                 >
-                <span class="mono text-orange-400">4A</span>
+                <span class="mono text-orange-500 dark:text-orange-400">4A</span>
                 <div
-                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-stone-900 border border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-300 shadow-xl leading-relaxed"
+                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-600 dark:text-stone-300 shadow-xl leading-relaxed"
                 >
                   May/June 2026 CIE AS-Levels: Chemistry A, Physics A, Comp.
                   Sci. A, Mathematics A
@@ -241,12 +281,12 @@
                 class="group relative flex justify-between items-center text-xs cursor-help"
               >
                 <span
-                  class="text-stone-500 group-hover:text-stone-300 transition-colors"
+                  class="text-stone-600 dark:text-stone-500 group-hover:text-stone-900 dark:group-hover:text-stone-300 transition-colors"
                   >Cambridge IGCSE</span
                 >
-                <span class="mono text-orange-400">6A*/2A</span>
+                <span class="mono text-orange-500 dark:text-orange-400">6A*/2A</span>
                 <div
-                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-stone-900 border border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-300 shadow-xl leading-relaxed"
+                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-600 dark:text-stone-300 shadow-xl leading-relaxed"
                 >
                   May/June 2025 CIE IGCSE: Mathematics A*, Coord. Sci. A*A*,
                   Comp. Sci. A*, Business A*, ICT A*, FLE A, Economics A
@@ -259,14 +299,14 @@
 
       <section id="spotify-container" class="mb-12 hidden">
         <h2
-          class="text-xs text-stone-600 uppercase tracking-widest mb-4 font-medium mono"
+          class="text-xs text-stone-500 dark:text-stone-600 uppercase tracking-widest mb-4 font-medium mono"
         >
           Now Playing
         </h2>
         <div class="flex items-center gap-4">
           <div class="relative w-12 h-12 flex-shrink-0">
             <div
-              class="absolute inset-0 bg-stone-800 rounded-full animate-record border border-stone-700/50"
+              class="absolute inset-0 bg-stone-200 dark:bg-stone-800 rounded-full animate-record border border-stone-300/50 dark:border-stone-700/50"
             >
               <img
                 id="spotify-art"
@@ -277,14 +317,14 @@
             </div>
             <div class="absolute inset-0 flex items-center justify-center">
               <div
-                class="w-3 h-3 bg-[#121212] rounded-full border border-stone-800 z-10"
+                class="w-3 h-3 bg-stone-50 dark:bg-[#121212] rounded-full border border-stone-300 dark:border-stone-800 z-10"
               ></div>
             </div>
           </div>
           <div class="flex flex-col min-w-0">
             <span
               id="spotify-song"
-              class="text-stone-200 text-sm font-medium truncate"
+              class="text-stone-800 dark:text-stone-200 text-sm font-medium truncate"
             ></span>
             <span
               id="spotify-artist"
@@ -300,47 +340,64 @@
             href="https://github.com/konyogony/"
             target="_blank"
             data-goatcounter-click="social-github"
-            class="text-stone-600 hover:text-stone-300 transition-colors"
+            class="text-stone-400 dark:text-stone-600 hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
             >github</a
           >
           <a
             href="https://discord.com/users/564472732071493633"
             target="_blank"
             data-goatcounter-click="social-discord"
-            class="text-stone-600 hover:text-stone-300 transition-colors"
+            class="text-stone-400 dark:text-stone-600 hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
             >discord</a
           >
           <a
             href="https://steamcommunity.com/id/kony_ogony/"
             target="_blank"
             data-goatcounter-click="social-steam"
-            class="text-stone-600 hover:text-stone-300 transition-colors"
+            class="text-stone-400 dark:text-stone-600 hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
             >steam</a
           >
           <a
             href="https://open.spotify.com/user/xeq03n90tcwkg4tegzdxggvzd"
             target="_blank"
             data-goatcounter-click="social-spotify"
-            class="text-stone-600 hover:text-stone-300 transition-colors"
+            class="text-stone-400 dark:text-stone-600 hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
             >spotify</a
+          >
+         <a
+            href="https://status.konyogony.dev"
+            target="_blank"
+            data-goatcounter-click="status"
+            class="text-stone-400 dark:text-stone-600 hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
+            >status</a
           >
           <a
             href="mailto:me@konyogony.dev"
             target="_blank"
             data-goatcounter-click="contact-mail"
-            class="text-stone-600 hover:text-stone-300 transition-colors"
+            class="text-stone-400 dark:text-stone-600 hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
             >mail</a
           >
         </div>
         <time
           id="clock"
-          class="mono text-xs text-stone-600 cursor-help"
+          class="mono text-xs text-stone-400 dark:text-stone-600 cursor-help"
           title="Phuket, Thailand (UTC+7)"
         ></time>
       </footer>
     </div>
 
     <script>
+      const themeToggle = document.getElementById('theme-toggle');
+      themeToggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        if (document.documentElement.classList.contains('dark')) {
+          localStorage.setItem('theme', 'dark');
+        } else {
+          localStorage.setItem('theme', 'light');
+        }
+      });
+
       const bg = document.querySelector(".bg-drawing");
       let mouseX = 0,
         mouseY = 0;
@@ -360,7 +417,7 @@
         mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
       });
 
-      function renderParallax() {
+      const renderParallax = () => {
         const targetX = -mouseX * INTENSITY;
         const targetY = -mouseY * INTENSITY;
 
@@ -369,10 +426,10 @@
 
         bg.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`;
         requestAnimationFrame(renderParallax);
-      }
+      };
       renderParallax();
 
-      function updateClock() {
+      const updateClock = () => {
         const now = new Date();
         document.getElementById("clock").textContent = now.toLocaleTimeString(
           "en-US",
@@ -383,7 +440,7 @@
             timeZone: "Asia/Bangkok",
           },
         );
-      }
+      };
       updateClock();
       setInterval(updateClock, 1000);
 
@@ -392,7 +449,7 @@
       const artistEl = document.getElementById("spotify-artist");
       const artEl = document.getElementById("spotify-art");
 
-      async function fetchStats() {
+      const fetchStats = async () => {
         try {
           const response = await fetch("https://api.konyogony.dev/get-stats");
           if (!response.ok) throw new Error("Offline");
@@ -424,7 +481,7 @@
         } catch (err) {
           spotifyContainer.classList.add("hidden");
         }
-      }
+      };
 
       fetchStats();
       setInterval(fetchStats, 5000);
