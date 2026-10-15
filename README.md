@@ -35,7 +35,7 @@
 </p>
 
 <p align="center">
-	<b><a href="https://wayclip.com">wayclip.com</a></b><br/>
+	<b><a href="https://github.com/Wayclip">wayclip.com</a></b><br/>
 	A Wayland clipping tool (🚧currently under maintenance🚧)
 </p>
 
