@@ -3,29 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>Ilya Rasputin (@konyogony)</title>
+
+    <script>
+      (function () {
+        const theme = localStorage.getItem("theme");
+        if (
+          theme === "dark" ||
+          (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+
+    <style>
+      html,
+      body {
+        background-color: #fafaf9;
+      }
+      html.dark,
+      html.dark body {
+        background-color: #121212 !important;
+      }
+    </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
 
     <script
       data-goatcounter="https://konyogony.goatcounter.com/count"
       async
       src="//gc.zgo.at/count.js"
     ></script>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-      }
-    </script>
-    
-    <script>
-      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    </script>
 
     <link
       rel="icon"
@@ -54,7 +72,9 @@
         background-repeat: no-repeat;
         opacity: 0;
         filter: invert(1);
-        transition: opacity 0.8s ease-in-out, filter 0.3s ease;
+        transition:
+          opacity 0.8s ease-in-out,
+          filter 0.3s ease;
         pointer-events: none;
         will-change: transform, opacity;
       }
@@ -105,7 +125,9 @@
       }
     </style>
   </head>
-  <body class="bg-stone-50 dark:bg-[#121212] text-stone-600 dark:text-stone-400 min-h-screen p-6 md:p-16 transition-colors duration-300">
+  <body
+    class="bg-stone-50 dark:bg-[#121212] text-stone-600 dark:text-stone-400 min-h-screen p-6 md:p-16"
+  >
     <div class="bg-drawing"></div>
     <div class="max-w-md mx-auto relative z-10">
       <header class="mb-10 relative">
@@ -114,13 +136,37 @@
           alt="@konyogony pfp"
           class="w-20 h-20 rounded-full mb-5"
         />
-        
-        <button id="theme-toggle" class="absolute top-0 right-0 p-2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition-colors focus:outline-none" aria-label="Toggle Theme">
-          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+
+        <button
+          id="theme-toggle"
+          class="absolute top-0 right-0 p-2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition-colors focus:outline-none"
+          aria-label="Toggle Theme"
+        >
+          <svg
+            class="w-5 h-5 hidden dark:block"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            />
           </svg>
-          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          <svg
+            class="w-5 h-5 block dark:hidden"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+            />
           </svg>
         </button>
 
@@ -131,7 +177,9 @@
         >
           @konyogony
         </a>
-        <h1 class="text-2xl text-stone-900 dark:text-stone-100 font-semibold">Ilya Rasputin</h1>
+        <h1 class="text-2xl text-stone-900 dark:text-stone-100 font-semibold">
+          Ilya Rasputin
+        </h1>
         <p class="mono text-xs text-stone-500 dark:text-stone-400 mt-1">
           rust engineer & web developer
         </p>
@@ -157,9 +205,7 @@
             >TypeScript</a
           >.
         </p>
-        <div
-          class="mono text-xs mt-4 flex flex-wrap gap-2 md:gap-3"
-        >
+        <div class="mono text-xs mt-4 flex flex-wrap gap-2 md:gap-3">
           <span class="text-stone-600 dark:text-stone-500">arch</span>
           <span class="text-stone-300 dark:text-stone-600">/</span>
           <span class="text-stone-600 dark:text-stone-500">neovim</span>
@@ -181,8 +227,12 @@
             data-goatcounter-click="work-ocean-simulation"
             class="project-item block py-3"
           >
-            <span class="text-stone-800 dark:text-stone-200 text-sm">🌊 Ocean Simulation</span>
-            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2">wgpu</span>
+            <span class="text-stone-800 dark:text-stone-200 text-sm"
+              >🌊 Ocean Simulation</span
+            >
+            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2"
+              >wgpu</span
+            >
           </a>
           <a
             href="https://physics.konyogony.dev/"
@@ -190,8 +240,12 @@
             data-goatcounter-click="work-physics-blog"
             class="project-item block py-3"
           >
-            <span class="text-stone-800 dark:text-stone-200 text-sm">🧲 Physics Blog</span>
-            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2">rust-gpu</span>
+            <span class="text-stone-800 dark:text-stone-200 text-sm"
+              >🧲 Physics Blog</span
+            >
+            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2"
+              >rust-gpu</span
+            >
           </a>
           <a
             href="https://github.com/wayclip"
@@ -199,8 +253,12 @@
             data-goatcounter-click="work-wayclip"
             class="project-item block py-3"
           >
-            <span class="text-stone-800 dark:text-stone-200 text-sm">🚧 Wayclip</span>
-            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2">gstreamer</span>
+            <span class="text-stone-800 dark:text-stone-200 text-sm"
+              >🚧 Wayclip</span
+            >
+            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2"
+              >gstreamer</span
+            >
           </a>
           <a
             href="https://hypr.konyogony.dev/"
@@ -208,8 +266,12 @@
             data-goatcounter-click="work-hyprland-recreation"
             class="project-item block py-3"
           >
-            <span class="text-stone-800 dark:text-stone-200 text-sm">🖥️ Hyprland Recreation</span>
-            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2">nextjs</span>
+            <span class="text-stone-800 dark:text-stone-200 text-sm"
+              >🖥️ Hyprland Recreation</span
+            >
+            <span class="mono text-xs text-stone-500 dark:text-stone-600 ml-2"
+              >nextjs</span
+            >
           </a>
         </div>
       </section>
@@ -235,10 +297,28 @@
                 class="group relative flex justify-between items-center text-xs cursor-help"
               >
                 <span
-                  class="text-stone-600 dark:text-stone-500 group-hover:text-stone-900 dark:group-hover:text-stone-300 transition-colors"
+                  class="text-stone-500 group-hover:text-stone-300 transition-colors"
+                  >IELTS Academic</span
+                >
+                <span class="mono text-orange-400">8.5</span>
+                <div
+                  class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-stone-900 border border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-300 shadow-xl leading-relaxed"
+                >
+                  24th October 2026 Academic IELTS. Reading: 9.0, Listening:
+                  9.0, Speaking: 9.0, Writting: 7.0
+                </div>
+              </div>
+
+              <div
+                class="group relative flex justify-between items-center text-xs cursor-help"
+              >
+                <span
+                  class="text-stone-500 group-hover:text-stone-300 transition-colors"
                   >August SAT</span
                 >
-                <span class="mono text-orange-500 dark:text-orange-400">1450</span>
+                <span class="mono text-orange-500 dark:text-orange-400"
+                  >1450</span
+                >
                 <div
                   class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-600 dark:text-stone-300 shadow-xl leading-relaxed"
                 >
@@ -253,7 +333,9 @@
                   class="text-stone-600 dark:text-stone-500 group-hover:text-stone-900 dark:group-hover:text-stone-300 transition-colors"
                   >Edexcel Extended Project</span
                 >
-                <span class="mono text-orange-500 dark:text-orange-400">A*</span>
+                <span class="mono text-orange-500 dark:text-orange-400"
+                  >A*</span
+                >
                 <div
                   class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-600 dark:text-stone-300 shadow-xl leading-relaxed"
                 >
@@ -268,7 +350,9 @@
                   class="text-stone-600 dark:text-stone-500 group-hover:text-stone-900 dark:group-hover:text-stone-300 transition-colors"
                   >Cambridge AS-Level</span
                 >
-                <span class="mono text-orange-500 dark:text-orange-400">4A</span>
+                <span class="mono text-orange-500 dark:text-orange-400"
+                  >4A</span
+                >
                 <div
                   class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-600 dark:text-stone-300 shadow-xl leading-relaxed"
                 >
@@ -284,7 +368,9 @@
                   class="text-stone-600 dark:text-stone-500 group-hover:text-stone-900 dark:group-hover:text-stone-300 transition-colors"
                   >Cambridge IGCSE</span
                 >
-                <span class="mono text-orange-500 dark:text-orange-400">6A*/2A</span>
+                <span class="mono text-orange-500 dark:text-orange-400"
+                  >6A*/2A</span
+                >
                 <div
                   class="pointer-events-none absolute bottom-full left-0 mb-2 hidden group-hover:block z-30 w-max max-w-xs rounded bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-2.5 py-1.5 text-[11px] mono text-stone-600 dark:text-stone-300 shadow-xl leading-relaxed"
                 >
@@ -364,7 +450,7 @@
             class="text-stone-400 dark:text-stone-600 hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
             >spotify</a
           >
-         <a
+          <a
             href="https://status.konyogony.dev"
             target="_blank"
             data-goatcounter-click="status"
@@ -388,13 +474,14 @@
     </div>
 
     <script>
-      const themeToggle = document.getElementById('theme-toggle');
-      themeToggle.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark');
-        if (document.documentElement.classList.contains('dark')) {
-          localStorage.setItem('theme', 'dark');
+      const themeToggle = document.getElementById("theme-toggle");
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.add("transition-colors", "duration-300");
+        document.documentElement.classList.toggle("dark");
+        if (document.documentElement.classList.contains("dark")) {
+          localStorage.setItem("theme", "dark");
         } else {
-          localStorage.setItem('theme', 'light');
+          localStorage.setItem("theme", "light");
         }
       });
 
