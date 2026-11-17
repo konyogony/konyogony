@@ -88,27 +88,18 @@
                 font-family: 'Inter', sans-serif;
                 overflow-x: hidden;
             }
-            .bg-drawing {
+            .bg-canvas {
                 position: fixed;
-                top: -5%;
-                left: -5%;
-                width: 110%;
-                height: 110%;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
                 z-index: 0;
-                background-image: url('math.svg');
-                background-size: 2500px;
-                background-position: center;
-                background-repeat: no-repeat;
-                opacity: 0.35;
-                filter: invert(1);
-                transition:
-                    opacity 0.8s ease-in-out,
-                    filter 0.3s ease;
                 pointer-events: none;
-                will-change: transform, opacity;
+                opacity: 0.35;
+                transition: opacity 0.8s ease-in-out;
             }
-            html.dark .bg-drawing {
-                filter: invert(0);
+            html.dark .bg-canvas {
                 opacity: 0.15;
             }
             .mono {
@@ -152,7 +143,7 @@
     <body
         class="bg-stone-50 dark:bg-[#121212] text-stone-600 dark:text-stone-400 min-h-screen p-6 md:p-16 relative"
     >
-        <div class="bg-drawing"></div>
+        <canvas class="bg-canvas"></canvas>
         <div class="max-w-md mx-auto relative z-10">
             <header class="mb-10 relative">
                 <a
@@ -549,6 +540,75 @@
         </div>
 
         <script>
+            const canvas = document.querySelector('.bg-canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            img.src = 'math.svg';
+
+            let imgLoaded = false;
+            let dpr = window.devicePixelRatio || 1;
+
+            const resizeCanvas = () => {
+                dpr = window.devicePixelRatio || 1;
+                canvas.width = Math.round(window.innerWidth * dpr);
+                canvas.height = Math.round(window.innerHeight * dpr);
+                draw();
+            };
+
+            window.addEventListener('resize', resizeCanvas);
+
+            let mouseX = 0,
+                mouseY = 0;
+            let currentX = 0,
+                currentY = 0;
+
+            const INTENSITY = 22;
+            const DAMPING = 0.05;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            });
+
+            const draw = () => {
+                if (!imgLoaded) return;
+                const isDark =
+                    document.documentElement.classList.contains('dark');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+
+                ctx.save();
+                ctx.scale(dpr, dpr);
+                ctx.filter = isDark ? 'none' : 'invert(1)';
+
+                const baseW = 2500;
+                const baseH =
+                    (img.naturalHeight / img.naturalWidth) * baseW || baseW;
+                const posX = (window.innerWidth - baseW) / 2 + currentX;
+                const posY = (window.innerHeight - baseH) / 2 + currentY;
+
+                ctx.drawImage(img, posX, posY, baseW, baseH);
+                ctx.restore();
+            };
+
+            img.onload = () => {
+                imgLoaded = true;
+                resizeCanvas();
+            };
+
+            const renderParallax = () => {
+                const targetX = -mouseX * INTENSITY;
+                const targetY = -mouseY * INTENSITY;
+
+                currentX += (targetX - currentX) * DAMPING;
+                currentY += (targetY - currentY) * DAMPING;
+
+                draw();
+                requestAnimationFrame(renderParallax);
+            };
+            requestAnimationFrame(renderParallax);
+
             const themeToggle = document.getElementById('theme-toggle');
             themeToggle.addEventListener('click', () => {
                 document.body.classList.add(
@@ -561,33 +621,8 @@
                 } else {
                     localStorage.setItem('theme', 'light');
                 }
+                draw();
             });
-
-            const bg = document.querySelector('.bg-drawing');
-            let mouseX = 0,
-                mouseY = 0;
-            let currentX = 0,
-                currentY = 0;
-
-            const INTENSITY = 10;
-            const DAMPING = 0.03;
-
-            window.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-            });
-
-            const renderParallax = () => {
-                const targetX = -mouseX * INTENSITY;
-                const targetY = -mouseY * INTENSITY;
-
-                currentX += (targetX - currentX) * DAMPING;
-                currentY += (targetY - currentY) * DAMPING;
-
-                bg.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`;
-                requestAnimationFrame(renderParallax);
-            };
-            renderParallax();
 
             const updateClock = () => {
                 const now = new Date();
